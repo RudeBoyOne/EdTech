@@ -1,0 +1,4 @@
+CREATE TABLE habilidade_tecnica (
+	id				BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome			VARCHAR(60)
+);
