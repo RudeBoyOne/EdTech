@@ -33,9 +33,8 @@ public class Professor {
 	@NonNull
 	private String email;
 	
-	@NonNull
 	@ManyToMany
-	@JoinTable(	name= "professor_x_habilidade", joinColumns = @JoinColumn(name="idProfessor", referencedColumnName = "idProfessor"),
+	@JoinTable(	name= "professor_has_habilidade", joinColumns = @JoinColumn(name="idProfessor", referencedColumnName = "idProfessor"),
 				inverseJoinColumns = @JoinColumn(name= "idHabilidadeTecnica", referencedColumnName = "idHabilidadeTecnica"))
 	private List<HabilidadeTecnica> habilidadesTecnicas = new ArrayList<>();
 	
@@ -45,7 +44,7 @@ public class Professor {
 	private Carreira carreira;
 	
 	@ManyToMany
-	@JoinTable( name= "professor_x_bootcamp", joinColumns = @JoinColumn(name="idProfessor", referencedColumnName = "idProfessor"),
+	@JoinTable( name= "professor_has_bootcamp", joinColumns = @JoinColumn(name="idProfessor", referencedColumnName = "idProfessor"),
 				inverseJoinColumns = @JoinColumn(name= "idBootcamp", referencedColumnName = "idBootcamp"))
 	private List<Bootcamp> bootcamps = new ArrayList<>();
 	

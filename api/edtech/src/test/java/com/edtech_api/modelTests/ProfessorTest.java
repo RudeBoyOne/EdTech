@@ -2,6 +2,11 @@ package com.edtech_api.modelTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -22,10 +27,8 @@ public class ProfessorTest {
 	
 	@BeforeAll
 	public void estanciaObjetoProfessor() {
-		habilidadeTecnica = new HabilidadeTecnica("Angular");
 		carreira = new Carreira("Java Web Full Stack", 16, 4);
-		professor =  new Professor("Lucas", "lucas@gmail.com", 
-				habilidadeTecnica, carreira);
+		professor =  new Professor("Lucas", "lucas@gmail.com", carreira);
 	}
 	
 	@Test
@@ -35,6 +38,5 @@ public class ProfessorTest {
 		assertEquals("Java Web Full Stack", professor.getCarreira().getNome());
 		assertEquals(16, professor.getCarreira().getDuracao());
 		assertEquals(4, professor.getCarreira().getDuracaoProjetoFinal());
-		assertEquals("Angular", professor.getHabilidadeTecnica().getNome());
 	}
 }
