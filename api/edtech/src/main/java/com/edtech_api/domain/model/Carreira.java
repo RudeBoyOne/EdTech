@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
 public class Carreira {
@@ -33,6 +35,9 @@ public class Carreira {
 	
 	@NonNull
 	private Integer duracaoProjetoFinal;
+	
+	@OneToMany(mappedBy = "carreira")
+	private List<Bootcamp> bootcamps = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "carreira")
 	private List<Professor> professores = new ArrayList<>();

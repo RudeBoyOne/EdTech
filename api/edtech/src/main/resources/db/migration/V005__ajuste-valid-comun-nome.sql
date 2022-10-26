@@ -1,1 +1,0 @@
-ALTER TABLE habilidade_tecnica CHANGE COLUMN nome nome VARCHAR(60) NOT NULL ;
