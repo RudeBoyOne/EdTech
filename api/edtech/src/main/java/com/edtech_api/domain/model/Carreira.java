@@ -37,5 +37,8 @@ public class Carreira {
 	private Integer duracaoProjetoFinal;
 	
 	@OneToMany(mappedBy = "carreira")
+	private List<Bootcamp> bootcamps = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "carreira")
 	private List<Professor> professores = new ArrayList<>();
 }
