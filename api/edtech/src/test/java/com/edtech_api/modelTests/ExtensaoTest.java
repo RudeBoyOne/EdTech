@@ -7,10 +7,12 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.edtech_api.domain.model.Extensao;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class ExtensaoTest {
 	
 	private Extensao extensao;
