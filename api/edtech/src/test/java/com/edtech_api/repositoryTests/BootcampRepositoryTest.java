@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import com.edtech_api.domain.model.Bootcamp;
 import com.edtech_api.domain.model.Carreira;
 import com.edtech_api.domain.repository.IBootcampRepository;
+
 
 @DataJpaTest
 @ActiveProfiles("test")
@@ -26,11 +28,15 @@ public class BootcampRepositoryTest {
 	private Bootcamp bootcamp;
 
 	private Bootcamp bootcampSalvo;
-
-	@Test
-	public void createAndSaveBootcamp() {
+	
+	@BeforeEach
+	public void estanciaObjetosBootcampParaTest() {
 		carreira = new Carreira("Java", 16, 4);
-		bootcamp = new Bootcamp("Java Web FullStack", carreira, LocalDate.of(2022, 8, 10), LocalDate.of(2022, 11, 15));
+		bootcamp = new Bootcamp("Java Web FullStack", carreira, LocalDate.of(2022, 8, 10), LocalDate.of(2022, 11, 15));		
+	}
+
+	@Test 	
+	public void createAndSaveBootcamp() {
 		bootcampSalvo = bootcampRepository.save(bootcamp);
 		assertEquals("Java Web FullStack", bootcampSalvo.getNome());
 		assertEquals(LocalDate.of(2022, 8, 10), bootcampSalvo.getDataInicio());
@@ -42,8 +48,6 @@ public class BootcampRepositoryTest {
 
 	@Test
 	public void updateBootcamp() {
-		carreira = new Carreira("Java", 16, 4);
-		bootcamp = new Bootcamp("Java Web FullStack", carreira, LocalDate.of(2022, 8, 10), LocalDate.of(2022, 11, 15));
 		bootcampRepository.save(bootcamp);
 		bootcamp.setNome("Pyton");
 		bootcamp.setDataInicio(LocalDate.of(2023, 1, 1));
@@ -56,16 +60,12 @@ public class BootcampRepositoryTest {
 
 	@Test
 	public void searchOneBootcampById() {
-		carreira = new Carreira("Java", 16, 4);
-		bootcamp = new Bootcamp("Java Web FullStack", carreira, LocalDate.of(2022, 8, 10), LocalDate.of(2022, 11, 15));
 		bootcampSalvo = bootcampRepository.save(bootcamp);
 		assertTrue(bootcampRepository.findById(bootcampSalvo.getIdBootcamp()).isPresent());
 	}
 
 	@Test
 	public void deleteOneCarreiraById() {
-		carreira = new Carreira("Java", 16, 4);
-		bootcamp = new Bootcamp("Java Web FullStack", carreira, LocalDate.of(2022, 8, 10), LocalDate.of(2022, 11, 15));
 		bootcampSalvo = bootcampRepository.save(bootcamp);
 		bootcampRepository.deleteById(bootcampSalvo.getIdBootcamp());
 		assertTrue(bootcampRepository.findById(bootcampSalvo.getIdBootcamp()).isEmpty());
