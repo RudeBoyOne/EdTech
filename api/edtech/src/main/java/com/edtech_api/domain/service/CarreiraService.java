@@ -1,5 +1,7 @@
 package com.edtech_api.domain.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.edtech_api.domain.exceptions.EdtechException;
@@ -24,6 +26,10 @@ public class CarreiraService {
 			throw new EdtechException("Já existe uma Carreira cadastrada com este nome, tente novamente!");
 		}
 		return carreiraRepository.save(carreira);
+	}
+	
+	public List<Carreira> listarCarreiras(){
+		return carreiraRepository.findAll();
 	}
 	
 	public Carreira buscarCarreiraById(Long idCarreira) {

@@ -62,6 +62,11 @@ public class CarreiraServiceTest {
 	}
 	
 	@Test
+	public void listAllCarreiras() {
+		assertEquals(1 , carreiraService.listarCarreiras().size());
+	}
+	
+	@Test
 	public void deleteCarreiraById() {
 		carreiraService.deletarCarreiraById(carreiraSalva.getIdCarreira());
 		
