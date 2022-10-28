@@ -34,7 +34,7 @@ public class CarreiraService {
 	
 	public Carreira buscarCarreiraById(Long idCarreira) {
 		return carreiraRepository.findById(idCarreira).orElseThrow(
-				() -> new RecursoNaoEncontrado("Carreira não econtrado ou não existente, tente novamente!"));
+				() -> new RecursoNaoEncontrado("Carreira não econtrado ou não existente!"));
 	}
 	
 	public boolean existeCarreiraById(Long idCarreira) {
@@ -45,7 +45,7 @@ public class CarreiraService {
 		if(existeCarreiraById(idCarreira)) {
 			carreiraRepository.deleteById(idCarreira);
 		}else {
-			throw new RecursoNaoEncontrado("Carreira não econtrado ou não existente, tente novamente!");
+			throw new RecursoNaoEncontrado("Carreira não encontrada ou não existente, tente novamente!");
 		}
 	}
 }
