@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,16 +38,15 @@ public class Professor {
 	private String email;
 	
 	@NonNull
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="idCarreira")
 	private Carreira carreira;
 	
 	@NonNull
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(	name= "professor_has_habilidade", joinColumns = @JoinColumn(name="idProfessor", referencedColumnName = "idProfessor"),
 				inverseJoinColumns = @JoinColumn(name= "idHabilidadeTecnica", referencedColumnName = "idHabilidadeTecnica"))
 	private List<HabilidadeTecnica> habilidadesTecnicas;
-	
 	
 	@ManyToMany
 	@JoinTable( name= "professor_has_bootcamp", joinColumns = @JoinColumn(name="idProfessor", referencedColumnName = "idProfessor"),

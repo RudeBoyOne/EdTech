@@ -3,6 +3,7 @@ package com.edtech_api.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class HabilidadeTecnica {
 	@NonNull
 	private String nome;
 	
-	@ManyToMany(mappedBy = "habilidadesTecnicas")
+	@ManyToMany(mappedBy = "habilidadesTecnicas", cascade = CascadeType.MERGE)
     private List<Professor> professores = new ArrayList<>();
 
 }
