@@ -9,12 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.edtech_api.domain.model.Bootcamp;
 import com.edtech_api.domain.model.Carreira;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @SpringBootTest
+@ActiveProfiles("test")
 public class BootcampTest {
 
 	private Bootcamp bootcamp;

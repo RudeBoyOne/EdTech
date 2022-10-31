@@ -3,12 +3,14 @@ package com.edtech_api.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -20,9 +22,11 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Carreira {
 	
+	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCarreira;
@@ -39,6 +43,6 @@ public class Carreira {
 	@OneToMany(mappedBy = "carreira")
 	private List<Bootcamp> bootcamps = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "carreira")
+	@OneToMany(mappedBy = "carreira", cascade = CascadeType.ALL)
 	private List<Professor> professores = new ArrayList<>();
 }

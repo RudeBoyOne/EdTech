@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -24,9 +25,13 @@ public class ExtensaoRepositoryTest {
 	
 	private Extensao extensaoSalva;
 	
+	@BeforeEach
+	public void estanciaObjetosExtensaoParaTest() {
+		extensao = new Extensao("Docker Fire", "Docker", LocalDate.of(2022, 3, 10), LocalDate.of(2022, 5, 20));		
+	}
+	
 	@Test
 	public void createAndSaveExtensao() {
-		extensao = new Extensao("Docker Fire", "Docker", LocalDate.of(2022, 3, 10), LocalDate.of(2022, 5, 20));
 		extensaoSalva = extensaoRepository.save(extensao);
 		assertEquals("Docker Fire", extensaoSalva.getNome());
 		assertEquals("Docker", extensaoSalva.getEspecialidade());
@@ -36,7 +41,6 @@ public class ExtensaoRepositoryTest {
 	
 	@Test
 	public void updateExtensao() {
-		extensao = new Extensao("Docker Fire", "Docker", LocalDate.of(2022, 3, 10), LocalDate.of(2022, 5, 20));
 		extensaoRepository.save(extensao);
 		extensao.setNome("Kubernetes Fire");
 		extensao.setEspecialidade("Kubernetes");
@@ -51,14 +55,12 @@ public class ExtensaoRepositoryTest {
 	
 	@Test
 	public void searchOneExtensaoById() {
-		extensao = new Extensao("Docker Fire", "Docker", LocalDate.of(2022, 3, 10), LocalDate.of(2022, 5, 20));
 		extensaoSalva = extensaoRepository.save(extensao);
 		assertTrue(extensaoRepository.findById(extensao.getIdExtensao()).isPresent());
 	}
 	
 	@Test
 	public void deleteOneExtensaoById() {
-		extensao = new Extensao("Docker Fire", "Docker", LocalDate.of(2022, 3, 10), LocalDate.of(2022, 5, 20));
 		extensaoSalva = extensaoRepository.save(extensao);
 		extensaoRepository.deleteById(extensaoSalva.getIdExtensao());
 		assertTrue(extensaoRepository.findById(extensaoSalva.getIdExtensao()).isEmpty());

@@ -3,6 +3,7 @@ package com.edtech_api.repositoryTests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -22,16 +23,19 @@ public class HabilidadeTecnicaTest {
 	
 	private HabilidadeTecnica habilidadeTecnicaSalva;
 	
+	@BeforeEach
+	public void estanciaObjetoHabilidadeParaTest() {
+		habilidadeTecnica = new HabilidadeTecnica("Java");		
+	}
+	
 	@Test
 	public void createAndSaveHabilidadeTecnica() {
-		habilidadeTecnica = new HabilidadeTecnica("Java");
 		habilidadeTecnicaSalva = habilidadeTecnicaRepository.save(habilidadeTecnica);
 		assertEquals("Java", habilidadeTecnicaSalva.getNome());
 	}
 	
 	@Test
 	public void updateHabilidadeTecnica() {
-		habilidadeTecnica = new HabilidadeTecnica("Java");
 		habilidadeTecnicaRepository.save(habilidadeTecnica);
 		habilidadeTecnica.setNome("Angular");
 		habilidadeTecnicaSalva = habilidadeTecnicaRepository.saveAndFlush(habilidadeTecnica);
@@ -40,14 +44,12 @@ public class HabilidadeTecnicaTest {
 	
 	@Test
 	public void searchHabilidadeTecnicaById() {
-		habilidadeTecnica = new HabilidadeTecnica("Java");
 		habilidadeTecnicaSalva = habilidadeTecnicaRepository.save(habilidadeTecnica);
 		assertTrue(habilidadeTecnicaRepository.findById(habilidadeTecnicaSalva.getIdHabilidadeTecnica()).isPresent());
 	}
 	
 	@Test
 	public void deleteHabilidadeTecnicaById() {
-		habilidadeTecnica = new HabilidadeTecnica("Java");
 		habilidadeTecnicaSalva = habilidadeTecnicaRepository.save(habilidadeTecnica);
 		habilidadeTecnicaRepository.deleteById(habilidadeTecnicaSalva.getIdHabilidadeTecnica());
 		assertTrue(habilidadeTecnicaRepository.findById(habilidadeTecnicaSalva.getIdHabilidadeTecnica()).isEmpty());

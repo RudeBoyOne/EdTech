@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -33,15 +34,18 @@ public class ProfessorRepositoryTest {
 	private Professor professor;
 
 	private Professor professorSalvo;
-
-	@Test
-	public void createAndSaveProfessor() {
+	
+	@BeforeEach
+	public void estanciaObjetoProfessorParaTest() {
 		habilidadeTecnica = new HabilidadeTecnica("Java");
 		habilidadeTecnicas.add(habilidadeTecnica);
 		carreira = new Carreira("Web Full Stack", 16, 4);
-		professor = new Professor("Lucas", "lucas@gmail.com", carreira, habilidadeTecnicas);
-		professorSalvo = professorRepository.save(professor);
+		professor = new Professor("Lucas", "lucas@gmail.com", carreira, habilidadeTecnicas);		
+	}
 
+	@Test
+	public void createAndSaveProfessor() {
+		professorSalvo = professorRepository.save(professor);
 		assertEquals("Lucas", professorSalvo.getNome());
 		assertEquals("lucas@gmail.com", professorSalvo.getEmail());
 		assertEquals("Web Full Stack", professorSalvo.getCarreira().getNome());
@@ -50,12 +54,7 @@ public class ProfessorRepositoryTest {
 	
 	@Test
 	public void updateProfessor() {
-		habilidadeTecnica = new HabilidadeTecnica("Java");
-		habilidadeTecnicas.add(habilidadeTecnica);
-		carreira = new Carreira("Web Full Stack", 16, 4);
-		professor = new Professor("Lucas", "lucas@gmail.com", carreira, habilidadeTecnicas);
 		professorRepository.save(professor);
-		
 		professor.setNome("Josisvaldo");
 		professor.setEmail("josisvaldo@gmail.com");
 		habilidadeTecnicas.removeAll(habilidadeTecnicas);
@@ -71,25 +70,14 @@ public class ProfessorRepositoryTest {
 	
 	@Test
 	public void searchProfessorById() {
-		habilidadeTecnica = new HabilidadeTecnica("Java");
-		habilidadeTecnicas.add(habilidadeTecnica);
-		carreira = new Carreira("Web Full Stack", 16, 4);
-		professor = new Professor("Lucas", "lucas@gmail.com", carreira, habilidadeTecnicas);
 		professorSalvo = professorRepository.save(professor);
-
 		assertTrue(professorRepository.findById(professorSalvo.getIdProfessor()).isPresent());
 	}
 	
 	@Test
 	public void deleteProfessorById() {
-		habilidadeTecnica = new HabilidadeTecnica("Java");
-		habilidadeTecnicas.add(habilidadeTecnica);
-		carreira = new Carreira("Web Full Stack", 16, 4);
-		professor = new Professor("Lucas", "lucas@gmail.com", carreira, habilidadeTecnicas);
 		professorSalvo = professorRepository.save(professor);
-
 		professorRepository.deleteById(professorSalvo.getIdProfessor());
-		
 		assertTrue(professorRepository.findById(professorSalvo.getIdProfessor()).isEmpty());
 	}
 }
