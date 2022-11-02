@@ -1,6 +1,6 @@
 CREATE TABLE professor_has_habilidade (
-	idProfessor				BIGINT NOT NULL,
-    idHabilidadeTecnica		BIGINT NOT NULL,
-    CONSTRAINT fk_ProfessorHasHabilidade		FOREIGN KEY(idProfessor)	REFERENCES professor(id),
-    CONSTRAINT fk_HabilidadeTecnica		FOREIGN KEY(idHabilidadeTecnica)	REFERENCES habilidade_tecnica(id)
+	id_professor				BIGINT NOT NULL,
+    id_habilidadeTecnica		BIGINT NOT NULL,
+    CONSTRAINT fk_ProfessorHasHabilidade		FOREIGN KEY(id_professor)	REFERENCES professor(id),
+    CONSTRAINT fk_HabilidadeTecnica		FOREIGN KEY(id_habilidadeTecnica)	REFERENCES habilidade_tecnica(id)
 );
