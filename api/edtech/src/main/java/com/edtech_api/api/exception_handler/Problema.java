@@ -1,4 +1,4 @@
-package com.edtech_api.api.exceptionHandler;
+package com.edtech_api.api.exception_handler;
 
 import java.time.OffsetDateTime;
 import java.util.List;
