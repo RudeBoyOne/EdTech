@@ -1,4 +1,4 @@
-package com.edtech_api.repositoryTests;
+package com.edtech_api.repository_tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
