@@ -50,8 +50,8 @@ public class CarreiraController {
 			logger.error("PUT CARREIRA - atualizar carreira - ERRO carreira com o id: "+ idCarreira + " não encontrado");
 			return ResponseEntity.notFound().build();
 		}
-		Carreira carreiraParaSerSalva = carreiraAssembler.toEntity(carreira);
-		carreiraParaSerSalva.setIdCarreira(idCarreira);
+		Carreira carreiraToEntity = carreiraAssembler.toEntity(carreira);
+		carreiraToEntity.setIdCarreira(idCarreira);
 		CarreiraOutput carreiraOutput = carreiraAssembler.toOutput(carreiraService.criarCarreira(carreiraParaSerSalva));
 		logger.info("PUT CARREIRA - carreira de id: "+ idCarreira + " - Alterado com sucesso!");
 		return ResponseEntity.ok(carreiraOutput);
