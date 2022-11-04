@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.edtech_api.domain.model.Extensao;
+import com.edtech_api.domain.model.enums.StatusExtensao;
 import com.edtech_api.domain.service.ExtensaoService;
 
 @TestInstance(Lifecycle.PER_CLASS)
@@ -31,7 +32,7 @@ public class ExtensaoServiceTest {
 	@BeforeAll
 	public void createAndSaveExtensao() {
 		extensao = new Extensao("Dockerização", "Docker", LocalDate.of(2022, 8, 20), 
-				LocalDate.of(2022, 10, 10));
+				LocalDate.of(2022, 10, 10), StatusExtensao.ABERTA);
 		
 		extensaoSalva = extensaoService.criarExtensao(extensao);
 		
@@ -39,6 +40,7 @@ public class ExtensaoServiceTest {
 		assertEquals("Docker", extensaoSalva.getEspecialidade());
 		assertEquals(LocalDate.of(2022, 8, 20), extensaoSalva.getDataInicio());
 		assertEquals(LocalDate.of(2022, 10, 10), extensaoSalva.getDataTermino());
+		assertEquals(StatusExtensao.ABERTA, extensaoSalva.getStatus());
 	}
 	
 	
@@ -60,6 +62,7 @@ public class ExtensaoServiceTest {
 		assertEquals("Kubernetes", extensaoService.buscarExtensaoById(extensaoSalva.getIdExtensao()).getEspecialidade());
 		assertEquals(LocalDate.of(2022, 8, 20), extensaoService.buscarExtensaoById(extensaoSalva.getIdExtensao()).getDataInicio());
 		assertEquals(LocalDate.of(2022, 10, 10), extensaoService.buscarExtensaoById(extensaoSalva.getIdExtensao()).getDataTermino());
+		assertEquals(StatusExtensao.ABERTA, extensaoService.buscarExtensaoById(extensaoSalva.getIdExtensao()).getStatus());
 	}
 	
 	@Test

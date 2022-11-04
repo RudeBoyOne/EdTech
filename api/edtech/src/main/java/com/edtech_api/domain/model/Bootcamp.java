@@ -7,12 +7,16 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.edtech_api.domain.model.enums.StatusBootcamp;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,6 +50,11 @@ public class Bootcamp {
 	
 	@NonNull
 	private LocalDate dataTermino;
+	
+	@Column
+	@NonNull
+	@Enumerated(EnumType.STRING)
+	private StatusBootcamp status;
 	
 	@ManyToMany(mappedBy = "bootcamps")
 	private List<Professor> professores = new ArrayList<>();

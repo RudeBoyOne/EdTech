@@ -13,6 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.edtech_api.domain.model.Bootcamp;
 import com.edtech_api.domain.model.Carreira;
+import com.edtech_api.domain.model.enums.StatusBootcamp;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @SpringBootTest
@@ -26,7 +27,7 @@ public class BootcampTest {
 	public void estanciaObjetoBootcamp() {
 		carreira = new Carreira("Java Full Stack", 16, 4);
 		bootcamp = new Bootcamp("Developer's Java Full Stack", 
-				carreira, LocalDate.of(2022, 8, 26), LocalDate.of(2022, 12, 15));
+				carreira, LocalDate.of(2022, 8, 26), LocalDate.of(2022, 12, 15), StatusBootcamp.ABERTA);
 	}
 	
 	@Test
@@ -37,5 +38,6 @@ public class BootcampTest {
 		assertEquals(4, bootcamp.getCarreira().getDuracaoProjetoFinal());
 		assertEquals(LocalDate.of(2022, 8, 26), bootcamp.getDataInicio());
 		assertEquals(LocalDate.of(2022, 12, 15), bootcamp.getDataTermino());
+		assertEquals(StatusBootcamp.ABERTA, bootcamp.getStatus());
 	}
 }

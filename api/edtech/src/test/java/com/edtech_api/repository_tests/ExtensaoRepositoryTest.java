@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.edtech_api.domain.model.Extensao;
+import com.edtech_api.domain.model.enums.StatusExtensao;
 import com.edtech_api.domain.repository.IExtensaoRepository;
 
 @DataJpaTest
@@ -27,7 +28,7 @@ public class ExtensaoRepositoryTest {
 	
 	@BeforeEach
 	public void estanciaObjetosExtensaoParaTest() {
-		extensao = new Extensao("Docker Fire", "Docker", LocalDate.of(2022, 3, 10), LocalDate.of(2022, 5, 20));		
+		extensao = new Extensao("Docker Fire", "Docker", LocalDate.of(2022, 3, 10), LocalDate.of(2022, 5, 20), StatusExtensao.ABERTA);		
 	}
 	
 	@Test
@@ -37,6 +38,7 @@ public class ExtensaoRepositoryTest {
 		assertEquals("Docker", extensaoSalva.getEspecialidade());
 		assertEquals(LocalDate.of(2022, 3, 10), extensao.getDataInicio());
 		assertEquals(LocalDate.of(2022, 5, 20), extensao.getDataTermino());
+		assertEquals(StatusExtensao.ABERTA, extensao.getStatus());
 	}
 	
 	@Test
@@ -51,6 +53,7 @@ public class ExtensaoRepositoryTest {
 		assertEquals("Kubernetes", extensaoSalva.getEspecialidade());
 		assertEquals(LocalDate.of(2022, 8, 01), extensao.getDataInicio());
 		assertEquals(LocalDate.of(2022, 10, 05), extensao.getDataTermino());
+		assertEquals(StatusExtensao.ABERTA, extensao.getStatus());
 	}
 	
 	@Test

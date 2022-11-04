@@ -4,5 +4,6 @@ CREATE TABLE bootcamp (
     data_inicio			DATE NOT NULL,
     data_termino		DATE NOT NULL,
     id_carreira			BIGINT NOT NULL,
+    status				VARCHAR(60),
     CONSTRAINT fk_Carreira	FOREIGN KEY(id_carreira)  REFERENCES carreira(id)
 );

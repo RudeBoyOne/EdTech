@@ -3,5 +3,6 @@ CREATE TABLE extensao (
     nome				VARCHAR(60) NOT NULL,
     especialidade 		VARCHAR(100) NOT NULL,
     data_inicio			DATE NOT NULL,
-    data_termino		DATE NOT NULL
+    data_termino		DATE NOT NULL,
+    status				VARCHAR(60)
 );

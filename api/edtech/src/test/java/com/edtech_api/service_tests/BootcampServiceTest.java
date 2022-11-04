@@ -15,6 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.edtech_api.domain.model.Bootcamp;
 import com.edtech_api.domain.model.Carreira;
+import com.edtech_api.domain.model.enums.StatusBootcamp;
 import com.edtech_api.domain.service.BootcampService;
 
 @TestInstance(Lifecycle.PER_CLASS)
@@ -36,7 +37,7 @@ public class BootcampServiceTest {
 	private void createAndSaveExtensao() {
 		carreira = new Carreira("Web FullStack", 16, 4);
 		bootcamp = new Bootcamp("Java", carreira, LocalDate.of(2022, 8, 20), 
-				LocalDate.of(2022, 10, 10));
+				LocalDate.of(2022, 10, 10), StatusBootcamp.ABERTA);
 		
 		bootcampSalvo = bootcampService.criarBootcamp(bootcamp);
 		
@@ -44,6 +45,7 @@ public class BootcampServiceTest {
 		assertEquals("Web FullStack", bootcampSalvo.getCarreira().getNome());
 		assertEquals(LocalDate.of(2022, 8, 20), bootcampSalvo.getDataInicio());
 		assertEquals(LocalDate.of(2022, 10, 10), bootcampSalvo.getDataTermino());
+		assertEquals(StatusBootcamp.ABERTA, bootcampSalvo.getStatus());
 	}
 	
 	@Test
@@ -58,6 +60,7 @@ public class BootcampServiceTest {
 		assertEquals("Web FullStack", bootcampSalvo.getCarreira().getNome());
 		assertEquals(LocalDate.of(2023, 1, 14), bootcampSalvo.getDataInicio());
 		assertEquals(LocalDate.of(2023, 4, 24), bootcampSalvo.getDataTermino());
+		assertEquals(StatusBootcamp.ABERTA, bootcampSalvo.getStatus());
 	}
 	
 	@Test
@@ -66,6 +69,7 @@ public class BootcampServiceTest {
 		assertEquals("Web FullStack", bootcampService.buscarBootcampById(bootcampSalvo.getIdBootcamp()).getCarreira().getNome());
 		assertEquals(LocalDate.of(2023, 1, 14), bootcampService.buscarBootcampById(bootcampSalvo.getIdBootcamp()).getDataInicio());
 		assertEquals(LocalDate.of(2023, 4, 24), bootcampService.buscarBootcampById(bootcampSalvo.getIdBootcamp()).getDataTermino());		
+		assertEquals(StatusBootcamp.ABERTA, bootcampService.buscarBootcampById(bootcampSalvo.getIdBootcamp()).getStatus());		
 	}
 	
 	@Test
