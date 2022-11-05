@@ -20,7 +20,8 @@ public class ExtensaoService {
 	
 	public Extensao criarExtensao(Extensao extensao) {
 		boolean extensaoJaExiste = extensaoRepository.findByNome(extensao.getNome())
-				.stream().anyMatch((extensaoExistente) -> !extensaoExistente.equals(extensao));
+				.stream().anyMatch(extensaoExistente -> !extensaoExistente.equals(extensao));
+		
 		if(extensaoJaExiste) {
 			throw new EdtechException("Já existe uma Extensão cadastrada com este nome, tente novamente!");
 		}
@@ -33,7 +34,7 @@ public class ExtensaoService {
 	
  	public Extensao buscarExtensaoById(Long idExtesao) {
 		return extensaoRepository.findById(idExtesao).orElseThrow(
-				() -> new RecursoNaoEncontrado("Extensão não encontrado  ou não existente, tente novamente!"));
+				() -> new RecursoNaoEncontrado("Extensão não encontrado ou não existente!"));
 	}
  	
  	public boolean existeExtensaoById(Long idExtensao) {
@@ -44,7 +45,7 @@ public class ExtensaoService {
  		if(existeExtensaoById(idExtensao)) {
  			extensaoRepository.deleteById(idExtensao);
  		}else {
- 			throw new RecursoNaoEncontrado("Extensao não encontrada ou não existente, tente novamente!");
+ 			throw new RecursoNaoEncontrado("Extensao não encontrada ou não existente!");
  		}
  	}
 }

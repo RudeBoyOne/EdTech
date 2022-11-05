@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 
 import com.edtech_api.domain.model.enums.StatusExtensao;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -23,11 +24,13 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@RequiredArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Extensao {
 
+	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

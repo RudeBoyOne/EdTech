@@ -52,8 +52,8 @@ public class CarreiraController {
 		}
 		Carreira carreiraToEntity = carreiraAssembler.toEntity(carreira);
 		carreiraToEntity.setIdCarreira(idCarreira);
-		CarreiraOutput carreiraOutput = carreiraAssembler.toOutput(carreiraService.criarCarreira(carreiraParaSerSalva));
-		logger.info("PUT CARREIRA - carreira de id: "+ idCarreira + " - Alterado com sucesso!");
+		CarreiraOutput carreiraOutput = carreiraAssembler.toOutput(carreiraService.criarCarreira(carreiraToEntity));
+		logger.info("PUT CARREIRA - carreira de id: "+ idCarreira + " - Alterada com sucesso!");
 		return ResponseEntity.ok(carreiraOutput);
 	}
 	
