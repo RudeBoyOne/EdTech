@@ -9,7 +9,7 @@ public enum StatusExtensao {
 
 	ABERTA("Aberta"),
 
-    PROXIMATURMA("Proxima Turma"),
+    PROXIMAEXTESAO("Proxima Turma"),
 
     ENCERRADA("Encerrada");
 	

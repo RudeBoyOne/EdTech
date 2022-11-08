@@ -2,8 +2,6 @@ package com.edtech_api.integration_tests;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.edtech_api.api.dtos.inputs.ExtensaoInput;
-import com.edtech_api.domain.model.enums.StatusExtensao;
+import com.edtech_api.api.dtos.inputs.HabilidadeTecnicaInput;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -26,25 +23,23 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 @ActiveProfiles("test")
-public class ExtensaoIntegrationTest {
+public class HabilidadeIntegrationTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@Test
-	public void criarExtensaoTest() throws Exception {
-		ExtensaoInput extensaoInput = new ExtensaoInput("Dockerizando", "Assembly", LocalDate.of(2022, 05, 04), 
-				LocalDate.of(2022, 10, 14), StatusExtensao.ABERTA.toString());
+	public void criarHabilidadeTest() throws Exception {
+		HabilidadeTecnicaInput habilidadeTecnicaInput = new HabilidadeTecnicaInput("JAVA");
 		
 		
 		ObjectWriter objectWriter = new ObjectMapper()
-				.findAndRegisterModules()
 				.configure(SerializationFeature.WRAP_ROOT_VALUE, false)
 				.writer();
 		
-		String payloadJson = objectWriter.writeValueAsString(extensaoInput);
+		String payloadJson = objectWriter.writeValueAsString(habilidadeTecnicaInput);
 		
-		mockMvc.perform(MockMvcRequestBuilders.post("/extensoes")
+		mockMvc.perform(MockMvcRequestBuilders.post("/habilidadesTecnicas")
 				.contentType(MediaType.APPLICATION_JSON)
                 .content(payloadJson))
                 .andDo(print())
@@ -53,20 +48,17 @@ public class ExtensaoIntegrationTest {
 	}
 	
 	@Test
-	public void updateExtensaoTest() throws Exception {
-		this.criarExtensaoTest();
-		ExtensaoInput extensaoInput = new ExtensaoInput("Pytando", "Assembly", LocalDate.of(2022, 05, 04), 
-				LocalDate.of(2022, 10, 14), StatusExtensao.ABERTA.toString());
-		
+	public void updateHabilidadeTest() throws Exception {
+		HabilidadeTecnicaInput habilidadeTecnicaInput = new HabilidadeTecnicaInput("Angular");
 		
 		ObjectWriter objectWriter = new ObjectMapper()
 				.findAndRegisterModules()
 				.configure(SerializationFeature.WRAP_ROOT_VALUE, false)
 				.writer();
 		
-		String payloadJson = objectWriter.writeValueAsString(extensaoInput);
+		String payloadJson = objectWriter.writeValueAsString(habilidadeTecnicaInput);
 		
-		mockMvc.perform(MockMvcRequestBuilders.put("/extensoes/{idExtensao}", 2)
+		mockMvc.perform(MockMvcRequestBuilders.put("/habilidadesTecnicas/{idHabilidadeTecnica}", 2)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(payloadJson))
 				.andDo(print())
@@ -76,27 +68,27 @@ public class ExtensaoIntegrationTest {
 	}
 	
 	@Test
-	public void searchExtensaoByIdTest() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/extensoes/{idExtensao}", 2)
+	public void searchHabilidadeByIdTest() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/habilidadesTecnicas/{idHabilidadeTecnica}", 2)
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(MockMvcResultMatchers.status().isOk());		
 	}
 	
 	@Test
-	public void buscarTodasExtensoes() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/extensoes")
+	public void buscarTodasHabilidadesTest() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/habilidadesTecnicas")
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 	
 	@Test
-	public void deletarExtensaoById() throws Exception {
-		this.criarExtensaoTest();
-		mockMvc.perform(MockMvcRequestBuilders.delete("/extensoes/{idExtensao}", 1)
+	public void deletarHabilidadeById() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.delete("/habilidadesTecnicas/{idHabilidadeTecnica}", 1)
 				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print())
 				.andExpect(MockMvcResultMatchers.status().isNoContent());
+		this.criarHabilidadeTest();
 	}
 }

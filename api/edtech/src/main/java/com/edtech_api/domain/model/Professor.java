@@ -1,6 +1,5 @@
 package com.edtech_api.domain.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -52,7 +51,7 @@ public class Professor {
 	@ManyToMany
 	@JoinTable( name= "professor_has_bootcamp", joinColumns = @JoinColumn(name="idProfessor", referencedColumnName = "id"),
 				inverseJoinColumns = @JoinColumn(name= "idBootcamp", referencedColumnName = "id"))
-	private List<Bootcamp> bootcamps = new ArrayList<>();
+	private List<Bootcamp> bootcamps;
 	
 	@ManyToOne
 	@JoinColumn(name= "idExtensao")
