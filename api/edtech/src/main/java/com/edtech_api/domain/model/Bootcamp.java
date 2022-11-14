@@ -41,7 +41,7 @@ public class Bootcamp {
 	private String nome;
 	
 	@NonNull
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "idCarreira")
 	private Carreira carreira;
 	
