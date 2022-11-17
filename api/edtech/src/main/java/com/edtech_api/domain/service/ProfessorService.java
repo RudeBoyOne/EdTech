@@ -18,11 +18,11 @@ public class ProfessorService {
 	private IProfessorRepository professorRepository;
 	
 	public Professor criarProfessor(Professor professor) {
-		boolean professorJaExiste = professorRepository.findByEmail(professor.getNome())
+		boolean professorJaExiste = professorRepository.findByEmail(professor.getEmail())
 				.stream().anyMatch((professorExistente) -> !professorExistente.equals(professor));
 		
 		if(professorJaExiste) {
-			throw new EdtechException("Já existe um Professor com este nome, tente novamente");
+			throw new EdtechException("Já existe um Professor com este email, tente novamente");
 		}
 		
 		return professorRepository.save(professor);
