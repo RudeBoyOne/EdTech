@@ -44,7 +44,7 @@ public class CarreiraController {
 		return ResponseEntity.status(201).body(carreiraToOutput);
 	}
 	
-	@PutMapping("{idCarreira}")
+	@PutMapping("/{idCarreira}")
 	public ResponseEntity<CarreiraOutput> atualizar(@PathVariable Long idCarreira, @Valid @RequestBody CarreiraInput carreira){
 		if(!carreiraService.existeCarreiraById(idCarreira)) {
 			logger.error("PUT CARREIRA - atualizar carreira - ERRO carreira com o id: "+ idCarreira + " não encontrado");
@@ -73,7 +73,7 @@ public class CarreiraController {
 		return ResponseEntity.ok(carreiraOutput);
 	}
 	
-	@DeleteMapping("{idCarreira}")
+	@DeleteMapping("/{idCarreira}")
 	public ResponseEntity<Void> deletarById(@PathVariable Long idCarreira){
 		carreiraService.deletarCarreiraById(idCarreira);
 		logger.info("DELETE CARREIRAS - deleção de carreira by id: "+ idCarreira + " - Realizado com sucesso!");

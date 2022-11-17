@@ -3,7 +3,7 @@ CREATE TABLE professor (
     nome					VARCHAR(60) NOT NULL,
     email					VARCHAR(100) NOT NULL,
     id_carreira				BIGINT NOT NULL,
-    id_extensao				BIGINT NOT NULL,
+    id_extensao				BIGINT,
     CONSTRAINT fk_Carreira_Professor	FOREIGN KEY(id_carreira)  REFERENCES carreira(id),
     CONSTRAINT fk_Extensao	FOREIGN KEY(id_extensao)  REFERENCES extensao(id)
 );

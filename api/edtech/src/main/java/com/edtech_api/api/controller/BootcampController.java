@@ -1,4 +1,4 @@
-package com.edtech_api.api.controller;
+ package com.edtech_api.api.controller;
 
 import java.util.List;
 
@@ -50,7 +50,7 @@ public class BootcampController {
 		return ResponseEntity.status(201).body(bootcampOutput);
 	}
 	
-	@PutMapping("{idBootcamp}")
+	@PutMapping("/{idBootcamp}")
 	public ResponseEntity<BootcampOutput> atualizar(@PathVariable Long idBootcamp, @Valid @RequestBody BootcampInput bootcamp){
 		if(!bootcampService.existeBootcampById(idBootcamp)) {
 			logger.error("PUT BOOTCAMP - atualizar bootcamp - ERRO bootcamp com o id: "+ idBootcamp + " não encontrado");
@@ -74,7 +74,7 @@ public class BootcampController {
 		return bootcampOutputs;
 	}
 	
-	@GetMapping("{idBootcamp}")
+	@GetMapping("/{idBootcamp}")
 	public ResponseEntity<BootcampOutput> buscarById(@PathVariable Long idBootcamp){
 		Bootcamp bootcampBuscado = bootcampService.buscarBootcampById(idBootcamp);
 		BootcampOutput bootcampOutput = bootcampAssembler.toOutput(bootcampBuscado);
@@ -82,7 +82,7 @@ public class BootcampController {
 		return ResponseEntity.ok(bootcampOutput);
 	}
 	
-	@DeleteMapping("{idBootcamp}")
+	@DeleteMapping("/{idBootcamp}")
 	public ResponseEntity<Void> deletarById(@PathVariable Long idBootcamp){
 		bootcampService.deletarBootcampById(idBootcamp);
 		logger.info("DELETE BOOTCAMP - deleção de bootcamp by id: "+ idBootcamp + " - Realizado com sucesso!");

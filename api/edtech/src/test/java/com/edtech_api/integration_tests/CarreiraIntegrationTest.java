@@ -44,7 +44,6 @@ public class CarreiraIntegrationTest {
                 .content(payloadJson))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().isCreated())
-                //.andExpect(content().contentType("application/json"))
                 .andReturn();
 	}
 	
@@ -63,7 +62,6 @@ public class CarreiraIntegrationTest {
 				.content(payloadJson))
 				.andDo(print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				//.andExpect(content().contentType("application/json"))
 				.andReturn();
 	}
 	

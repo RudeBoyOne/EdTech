@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -21,11 +22,13 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@RequiredArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Professor {
 	
+	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -38,12 +41,12 @@ public class Professor {
 	private String email;
 	
 	@NonNull
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="idCarreira")
 	private Carreira carreira;
 	
 	@NonNull
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(	name= "professor_has_habilidade", joinColumns = @JoinColumn(name="idProfessor", referencedColumnName = "id"),
 				inverseJoinColumns = @JoinColumn(name= "idHabilidadeTecnica", referencedColumnName = "id"))
 	private List<HabilidadeTecnica> habilidadesTecnicas;
